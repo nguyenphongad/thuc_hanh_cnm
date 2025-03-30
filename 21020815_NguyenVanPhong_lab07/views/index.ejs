@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản Phẩm</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="content">
+        <!-- Form thêm sản phẩm -->
+        <form action="/insert" method="POST"  enctype="multipart/form-data">
+            <label for="ma_sp">Mã sản phẩm:</label>
+            <input type="text" id="ma_sp" name="ma_sp" required><br><br>
+            
+            <label for="ten_sp">Tên sản phẩm:</label>
+            <input type="text" id="ten_sp" name="ten_sp" required><br><br>
+            
+            <label for="so_luong">Số lượng:</label>
+            <input type="number" id="so_luong" name="so_luong" required><br><br>
+
+
+            <label for="img">Up ảnh</label>
+            <input type="file" id="img" name="image"  accept="image/*"/>
+            
+            <button type="submit" class="btn_add_sp">Thêm sản phẩm</button>
+        </form>
+
+
+
+        <h3>Danh sách sản phẩm</h3>
+        <form id="delete" method="POST" action="/delete">
+            <table border="1">
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên SP</th>
+                    <th>Số lượng</th>
+                    <th>Ảnh</th>
+                    <th>Chọn</th>
+                </tr>
+                <% for (let i = 0; i < sanPhams.length; i++) { %>
+                    <tr>
+                        <td><%= sanPhams[i].ma_sp %></td>
+                        <td><%= sanPhams[i].ten_sp %></td>
+                        <td><%= sanPhams[i].so_luong %></td>
+                        <td><img style="width: 60px;height: 60px;" src="<%= sanPhams[i].image_url %>"/></td>
+                        <td>
+                            <input type="checkbox" name="ma_sp[]" value="<%= sanPhams[i].ma_sp %>" />
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+            <br/>
+            <input type="submit" value="Xóa sản phẩm đã chọn" />
+        </form>
+    </div>
+</body>
+</html>
